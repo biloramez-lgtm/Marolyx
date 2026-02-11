@@ -1,6 +1,7 @@
 package com.example.gamestools.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -8,7 +9,6 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.KeyboardOptions
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -23,8 +23,8 @@ fun TimerScreen(navController: NavHostController) {
     var inputMinutes by rememberSaveable { mutableStateOf("") }
     var inputSeconds by rememberSaveable { mutableStateOf("") }
 
-    LaunchedEffect(isRunning) {
-        while (isRunning && timeInSeconds > 0) {
+    LaunchedEffect(isRunning, timeInSeconds) {
+        if (isRunning && timeInSeconds > 0) {
             delay(1000)
             timeInSeconds--
             if (timeInSeconds == 0) {
@@ -58,7 +58,7 @@ fun TimerScreen(navController: NavHostController) {
             verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
 
-            // Time Display
+            // عرض الوقت
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(
@@ -83,7 +83,7 @@ fun TimerScreen(navController: NavHostController) {
                 }
             }
 
-            // Input Fields (only when timer is stopped and zero)
+            // إدخال الوقت
             if (!isRunning && timeInSeconds == 0) {
 
                 Row(
@@ -136,7 +136,7 @@ fun TimerScreen(navController: NavHostController) {
                 }
             }
 
-            // Control Buttons
+            // أزرار التحكم
             if (timeInSeconds > 0) {
 
                 Row(
