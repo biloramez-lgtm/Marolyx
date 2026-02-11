@@ -1,8 +1,9 @@
-name: Build APK
+name: Android Build APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -10,34 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: ⬇️ Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: ☕ Set up JDK 17
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: 🧱 Grant Execute Permission
+      - name: Grant execute permission to gradlew
         run: chmod +x gradlew
 
-      - name: 🔎 Show Gradle Version
-        run: ./gradlew --version
+      - name: Generate Gradle Wrapper (if missing)
+        run: |
+          if [ ! -f gradlew ]; then
+            gradle wrapper
+          fi
 
-      - name: 🧹 Clean Project
-        run: ./gradlew clean
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
 
-      - name: 📦 Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
-
-      - name: 📦 Build Release APK
-        run: ./gradlew assembleRelease --stacktrace
-
-      - name: 📤 Upload APK Files
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Marolyx-APK
-          path: |
-            app/build/outputs/apk/debug/*.apk
-            app/build/outputs/apk/release/*.apk
+          name: Marolyx-Debug-APK
+          path: app/build/outputs/apk/debug/app-debug.apk
