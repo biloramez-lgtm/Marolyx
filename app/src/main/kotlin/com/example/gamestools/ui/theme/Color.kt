@@ -2,7 +2,8 @@ package com.example.gamestools.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Light Colors
+/* -------------------- LIGHT THEME -------------------- */
+
 val PrimaryLight = Color(0xFF6750A4)
 val OnPrimaryLight = Color(0xFFFFFFFF)
 val PrimaryContainerLight = Color(0xFFEADDFF)
@@ -28,8 +29,14 @@ val OnBackgroundLight = Color(0xFF1C1B1F)
 
 val SurfaceLight = Color(0xFFFFFBFE)
 val OnSurfaceLight = Color(0xFF1C1B1F)
+val SurfaceVariantLight = Color(0xFFE7E0EC)
+val OnSurfaceVariantLight = Color(0xFF49454F)
 
-// Dark Colors
+val OutlineLight = Color(0xFF79747E)
+
+
+/* -------------------- DARK THEME -------------------- */
+
 val PrimaryDark = Color(0xFFD0BCFF)
 val OnPrimaryDark = Color(0xFF371E73)
 val PrimaryContainerDark = Color(0xFF4F378B)
@@ -47,7 +54,7 @@ val OnTertiaryContainerDark = Color(0xFFFFD8E4)
 
 val ErrorDark = Color(0xFFF2B8B5)
 val OnErrorDark = Color(0xFF601410)
-val ErrorContainerDark = Color(0xFF8C1d18)
+val ErrorContainerDark = Color(0xFF8C1D18)
 val OnErrorContainerDark = Color(0xFFF9DEDC)
 
 val BackgroundDark = Color(0xFF1C1B1F)
@@ -55,3 +62,7 @@ val OnBackgroundDark = Color(0xFFE6E1E6)
 
 val SurfaceDark = Color(0xFF1C1B1F)
 val OnSurfaceDark = Color(0xFFE6E1E6)
+val SurfaceVariantDark = Color(0xFF49454F)
+val OnSurfaceVariantDark = Color(0xFFCAC4D0)
+
+val OutlineDark = Color(0xFF938F99)
