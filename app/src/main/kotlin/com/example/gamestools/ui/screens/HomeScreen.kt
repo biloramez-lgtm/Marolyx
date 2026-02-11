@@ -7,7 +7,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 
@@ -21,46 +21,42 @@ fun HomeScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Spacer(modifier = Modifier.height(32.dp))
-        
+
         Text(
             text = "Games Tools",
             style = MaterialTheme.typography.displayMedium,
             color = MaterialTheme.colorScheme.primary
         )
-        
+
         Text(
             text = "أدوات الألعاب",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.secondary
         )
-        
+
         Spacer(modifier = Modifier.height(32.dp))
-        
-        // Dice Screen Button
+
         HomeScreenButton(
             title = "Dice Roller",
             subtitle = "رمي النرد",
             icon = Icons.Default.Casino,
             onClick = { navController.navigate("dice") }
         )
-        
-        // Timer Screen Button
+
         HomeScreenButton(
             title = "Timer",
             subtitle = "المؤقت",
             icon = Icons.Default.Timer,
             onClick = { navController.navigate("timer") }
         )
-        
-        // Spinner Screen Button
+
         HomeScreenButton(
             title = "Spinner",
             subtitle = "رولة الحظ",
             icon = Icons.Default.Favorite,
             onClick = { navController.navigate("spinner") }
         )
-        
-        // Probability Screen Button
+
         HomeScreenButton(
             title = "Probability",
             subtitle = "الاحتمالات",
@@ -74,7 +70,7 @@ fun HomeScreen(navController: NavHostController) {
 fun HomeScreenButton(
     title: String,
     subtitle: String,
-    icon: androidx.compose.material.icons.materialIcon,
+    icon: ImageVector,   // ✅ النوع الصحيح
     onClick: () -> Unit
 ) {
     Button(
@@ -99,7 +95,7 @@ fun HomeScreenButton(
                 modifier = Modifier.size(40.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
-            
+
             Column(
                 modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.Center
