@@ -2,7 +2,7 @@ package com.example.gamestools.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,7 +13,6 @@ import kotlin.random.Random
 
 @Composable
 fun DiceScreen(navController: NavHostController) {
-    var diceValue by remember { mutableStateOf(1) }
     var numberOfDice by remember { mutableStateOf(1) }
     var diceType by remember { mutableStateOf(6) }
     var results by remember { mutableStateOf(listOf<Int>()) }
@@ -26,7 +25,8 @@ fun DiceScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Header with back button
+
+        // Header
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -34,14 +34,16 @@ fun DiceScreen(navController: NavHostController) {
         ) {
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    imageVector = Icons.Filled.ArrowBack,
                     contentDescription = "Back"
                 )
             }
+
             Text(
                 text = "Dice Roller - رمي النرد",
                 style = MaterialTheme.typography.headlineSmall
             )
+
             Spacer(modifier = Modifier.width(48.dp))
         }
 
@@ -59,6 +61,7 @@ fun DiceScreen(navController: NavHostController) {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text("عدد الأوجه", style = MaterialTheme.typography.titleMedium)
+
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -68,7 +71,8 @@ fun DiceScreen(navController: NavHostController) {
                             onClick = { diceType = type },
                             modifier = Modifier.weight(1f),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if (diceType == type)
+                                containerColor =
+                                if (diceType == type)
                                     MaterialTheme.colorScheme.primary
                                 else
                                     MaterialTheme.colorScheme.secondary
@@ -81,7 +85,7 @@ fun DiceScreen(navController: NavHostController) {
             }
         }
 
-        // Number of Dice Selection
+        // Number of Dice
         Card(
             modifier = Modifier.fillMaxWidth(),
             colors = CardDefaults.cardColors(
@@ -92,7 +96,11 @@ fun DiceScreen(navController: NavHostController) {
                 modifier = Modifier.padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Text("عدد النرد: $numberOfDice", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "عدد النرد: $numberOfDice",
+                    style = MaterialTheme.typography.titleMedium
+                )
+
                 Slider(
                     value = numberOfDice.toFloat(),
                     onValueChange = { numberOfDice = it.toInt() },
@@ -107,20 +115,18 @@ fun DiceScreen(navController: NavHostController) {
         // Roll Button
         Button(
             onClick = {
-                results = List(numberOfDice) { Random.nextInt(1, diceType + 1) }
+                results = List(numberOfDice) {
+                    Random.nextInt(1, diceType + 1)
+                }
                 totalValue = results.sum()
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            )
+                .height(56.dp)
         ) {
             Text(
                 "رمي النرد",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.onPrimary
+                style = MaterialTheme.typography.titleLarge
             )
         }
 
@@ -138,11 +144,10 @@ fun DiceScreen(navController: NavHostController) {
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text("النتائج", style = MaterialTheme.typography.titleLarge)
-                    
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         results.forEach { value ->
                             Card(
@@ -164,9 +169,9 @@ fun DiceScreen(navController: NavHostController) {
                             }
                         }
                     }
-                    
-                    Divider()
-                    
+
+                    HorizontalDivider()
+
                     Text(
                         "المجموع: $totalValue",
                         style = MaterialTheme.typography.displaySmall,
